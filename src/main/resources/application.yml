@@ -1,0 +1,79 @@
+server:
+  port: 2000
+  servlet:
+    context-path: /config
+context-path:
+
+#Eureka注册中心配置
+spring:
+  application:
+    name: feign-config-server
+  #读取本地配置，加载的方式为本地类路径
+  cloud:
+    config:
+      #name: config-server
+      server:
+        native:
+          search-locations: classpath:config/ # 搜索src/main/resource 下的properties文件夹下的文件
+  profiles:
+    active: native
+#  如果不配置 spring.profiles.active=active 报错：
+#  Invalid config server configuration.
+#  Action:
+#  If you are using the git profile, you need to set a Git URI in your configuration.
+#  If you are using a native profile and have spring.cloud.config.server.bootstrap=true,
+#  you need to use a composite configuration.
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+#配置配置中读取配置的方式
+##  Config Server获取配置支持的方式很多，
+##  包括Git仓库(github/gitee等)，任何与JDBC兼容的数据库，
+##  Subversion，Hashicorp Vault，Credhub和本地文件系统。
+
+  ####### 1. git配置的方式
+  ####### spring:
+  #######   cloud:
+  #######    config:
+  #######       server:
+  #######        git:
+  #######           uri: https://gitee.com/bugzeroman/spring-cloud-config.git
+
+  ####### 2.本地配置方式包括本地类路径和文件系统两种方式，
+  ####### 要使用本地配置方式，首先设置spring.profiles.active为native，然后spring.cloud.config.server.native.searchLocations指向任何静态的URL，
+
+  #######  2.1 : 本地类路径方式 通过在search-locations中指定classpath下的路径：
+  #######  spring:
+  #######    application:
+  #######      name: config-server
+  #######    profiles:
+  #######      active: native
+  #######    cloud:
+  #######      config:
+  #######        server:
+  #######          native:
+  #######            search-locations: classpath:/config-server/gitee
+
+  #######  2.1 : 本地文件系统方式 通过在search-locations中指定file协议的本地路径：
+  #######  spring:
+  #######    application:
+  #######      name: config-server
+  #######    profiles:
+  #######      active: native
+  #######    cloud:
+  #######      config:
+  #######        server:
+  #######          native:
+  #######            search-locations: file:///D:/spring-cloud-demo/config-server/src/main/resources/config-server/gitee
+  #######  需要注意的是Windows中的绝对路径需要额外的/：
+  #######  file:///${user.home}/config-repo
+  #######  而且额外的/是需要转义的，所有上面有3个/；
+  #######  在Lunix环境下，只需要1个/即可:
+  #######  file:/${user.home}/config-repo
+
+
+
+
+
