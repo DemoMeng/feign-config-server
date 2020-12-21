@@ -1,22 +1,23 @@
 server:
   port: 2000
-  servlet:
-    context-path: /config
-context-path:
 
 #Eureka注册中心配置
 spring:
   application:
     name: feign-config-server
+  profiles:
+    active: native
   #读取本地配置，加载的方式为本地类路径
   cloud:
     config:
       #name: config-server
+      #enabled: false #远程配置关闭
       server:
+        #health:
+          #enable: false
         native:
           search-locations: classpath:config/ # 搜索src/main/resource 下的properties文件夹下的文件
-  profiles:
-    active: native
+
 #  如果不配置 spring.profiles.active=active 报错：
 #  Invalid config server configuration.
 #  Action:
@@ -28,10 +29,12 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-#配置配置中读取配置的方式
-##  Config Server获取配置支持的方式很多，
-##  包括Git仓库(github/gitee等)，任何与JDBC兼容的数据库，
-##  Subversion，Hashicorp Vault，Credhub和本地文件系统。
+
+
+  #配置配置中读取配置的方式
+  ##  Config Server获取配置支持的方式很多，
+  ##  包括Git仓库(github/gitee等)，任何与JDBC兼容的数据库，
+  ##  Subversion，Hashicorp Vault，Credhub和本地文件系统。
 
   ####### 1. git配置的方式
   ####### spring:
@@ -72,8 +75,4 @@ eureka:
   #######  而且额外的/是需要转义的，所有上面有3个/；
   #######  在Lunix环境下，只需要1个/即可:
   #######  file:/${user.home}/config-repo
-
-
-
-
 
