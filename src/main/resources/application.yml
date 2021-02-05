@@ -17,6 +17,12 @@ spring:
           #enable: false
         native:
           search-locations: classpath:config/ # 搜索src/main/resource 下的properties文件夹下的文件
+    #Sentinel
+    sentinel:
+      eager: true
+      transport:
+        port: 8719
+        dashboard: localhost:8080
 
 #  如果不配置 spring.profiles.active=active 报错：
 #  Invalid config server configuration.
@@ -29,6 +35,7 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
 
 
   #配置配置中读取配置的方式
