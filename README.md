@@ -52,11 +52,11 @@
     
 
 
-![直接访问配置中心](/Applications/mqz/feign-config-server/images/配置中心-配置中心客户端bootstrap配置.jpg)
+![直接访问配置中心](./images/配置中心-配置中心客户端bootstrap配置.jpg)
     
 ### 配置成功
 
-![直接访问配置中心](/Applications/mqz/feign-config-server/images/配置中心-直接访问配置中查看配置信息.jpg)
+![直接访问配置中心](./images/配置中心-直接访问配置中查看配置信息.jpg)
     
 
     
